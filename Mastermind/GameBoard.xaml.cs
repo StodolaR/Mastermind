@@ -118,6 +118,7 @@ namespace Mastermind
                         caps[i,j].Fill = Brushes.Transparent;
                     }
                 }
+                gbState.ResetState();
             }
         }
     }
