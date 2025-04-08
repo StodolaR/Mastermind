@@ -8,8 +8,9 @@
              d:DesignHeight="600" d:DesignWidth="400">
     <Grid>
         <Canvas x:Name="board" Width="400" Height="600">
-            <Rectangle Width="300" Height="600" Fill="LightGray"/>
-            <Rectangle Width="100" Height="600" Fill="Gray" Canvas.Left="300"/>
+            <Border BorderThickness="10" BorderBrush="Gray">
+                <Rectangle Width="400" Height="600" Fill="LightGray"/>
+            </Border>
         </Canvas>
     </Grid>
 </UserControl>

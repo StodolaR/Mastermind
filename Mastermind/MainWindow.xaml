@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mastermind"
         mc:Ignorable="d"
-        Title="MainWindow" Height="630" Width="400">
+        Title="MainWindow" Height="700" Width="500">
     <Grid>
         <local:GameBoard/>
     </Grid>
