@@ -32,8 +32,9 @@ namespace Mastermind
             InitializeComponent();
             gbState = new GameBoardState();
             gbState.FillSecretFields(capBrushes.Count());
+            CreateHiddenCaps();
             caps = new Path[GameBoardState.fieldsCount,GameBoardState.rowsCount];
-            pins = new Rectangle[GameBoardState.fieldsCount,GameBoardState.rowsCount];
+            pins = new Rectangle[GameBoardState.fieldsCount,GameBoardState.rowsCount];            
             for (int j = 0; j < GameBoardState.rowsCount; j++)
             {
                 for (int i = 0; i < GameBoardState.fieldsCount; i++)
@@ -47,6 +48,18 @@ namespace Mastermind
             for (int color = 1;color < capBrushes.Count();color++)
             {
                 CreateColorCaps(color);
+            }
+        }
+        private void CreateHiddenCaps()
+        {
+            for (int i = 0; i  < GameBoardState.fieldsCount; i++)
+            {
+                Path hiddenCap = new Path();
+                hiddenCap.Data = Geometry.Parse(capData);
+                hiddenCap.Fill = capBrushes[gbState.secretFields[i]];
+                board.Children.Add(hiddenCap);
+                Canvas.SetLeft(hiddenCap, 27 + i * 30);
+                Canvas.SetTop(hiddenCap, 60);
             }
         }
         private void CreateCapPlaces(int i, int j)
@@ -166,6 +179,7 @@ namespace Mastermind
             }
             gbState.ResetState();
             gbState.FillSecretFields(capBrushes.Count());
+            CreateHiddenCaps();
         }
     }
 }
