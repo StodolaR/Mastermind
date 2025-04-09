@@ -4,6 +4,25 @@
              xmlns:local="clr-namespace:Mastermind"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Path" x:Key="coverStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CoverUp}" Value="true">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:1" From="70" To="40" Storyboard.TargetProperty="(Canvas.Top)"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.1" From="62" To="70" Storyboard.TargetProperty="(Canvas.Top)"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>

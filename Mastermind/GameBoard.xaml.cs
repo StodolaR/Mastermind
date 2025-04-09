@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -19,7 +20,7 @@ namespace Mastermind
     /// <summary>
     /// Interaction logic for GameBoard.xaml
     /// </summary>
-    public partial class GameBoard : UserControl
+    public partial class GameBoard : UserControl, INotifyPropertyChanged
     {
         GameBoardState gbState;
         private Path[,] caps;
@@ -27,6 +28,19 @@ namespace Mastermind
         private string capData = "M 0 0 A 11,5 0 0 0 22,0 A 11,11 0 0 0 0,0";
         private Brush[] capBrushes = {Brushes.Transparent, Brushes.Red, Brushes.Green, Brushes.Orange, Brushes.Purple, Brushes.Brown, 
                                         Brushes.Yellow, Brushes.White, Brushes.Blue};
+        private bool coverUp;
+        public bool CoverUp
+        {
+            get => coverUp;
+            set
+            {
+                coverUp = value;
+                OnPropertyChanged(nameof(CoverUp));
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public GameBoard()
         {
             InitializeComponent();
@@ -45,10 +59,12 @@ namespace Mastermind
                     CreateTransparentPins(i,j);
                 }
             }
-            for (int color = 1;color < capBrushes.Count();color++)
+            for (int color = 1; color < capBrushes.Count(); color++)
             {
                 CreateColorCaps(color);
             }
+            CoverUp = false;
+            DataContext = this;
         }
         private void CreateHiddenCaps()
         {
@@ -153,12 +169,16 @@ namespace Mastermind
                 }
                 if (evalPins.BlackPins == GameBoardState.fieldsCount)
                 {
+                    CoverUp = true;
                     MessageBox.Show("Vyhrál jsi!");
+                    CoverUp = false;
                     ResetBoard();
                 }
                 else if (gbState.actualRow == GameBoardState.rowsCount - 1)
                 {
+                    CoverUp = true;
                     MessageBox.Show("Prohrál jsi...");
+                    CoverUp = false;
                     ResetBoard();
                 }
                 else
@@ -180,6 +200,13 @@ namespace Mastermind
             gbState.ResetState();
             gbState.FillSecretFields(capBrushes.Count());
             CreateHiddenCaps();
+        }
+        public void OnPropertyChanged(string propertyName)
+        {
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

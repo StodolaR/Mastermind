@@ -8,9 +8,13 @@
              d:DesignHeight="500" d:DesignWidth="400">
     <Grid>
         <Canvas x:Name="board" Width="400" Height="500">
-            <Border BorderThickness="10" BorderBrush="Gray">
+            <Border BorderThickness="2,0,2,10" BorderBrush="Gray">
                 <Rectangle Width="400" Height="500" Fill="LightGray"/>
             </Border>
+            <Path Data="M 0 -20 L 155 -20 L 160 -50 L -5 -50 Z" Fill="Gray" Panel.ZIndex="1" Canvas.Left="20" Canvas.Top="60" Style="{StaticResource coverStyle}"/>
+            <Path Data="M -5 0 L 160 0 L 155 -20 L 0 -20 Z" Fill="DarkGray" Panel.ZIndex="1" Canvas.Left="20" Canvas.Top="60" Style="{StaticResource coverStyle}"/>
+            <Path Data="M -5 0 L 0 -20 L -5 -50 L -10 -30 Z" Fill="DimGray" Panel.ZIndex="1" Canvas.Left="20" Canvas.Top="60" Style="{StaticResource coverStyle}"/>
+            <Path Data="M 160 0 L 165 -30 L 160 -50 L 155 -20 Z" Fill="DimGray" Panel.ZIndex="1" Canvas.Left="20" Canvas.Top="60" Style="{StaticResource coverStyle}"/>
         </Canvas>
     </Grid>
 </UserControl>
