@@ -17,7 +17,7 @@
                     <DataTrigger.ExitActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:0.1" From="40" To="60" Storyboard.TargetProperty="(Canvas.Top)"/>
+                                <DoubleAnimation Duration="0:0:0.1" From="40" To="70" Storyboard.TargetProperty="(Canvas.Top)"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.ExitActions>
