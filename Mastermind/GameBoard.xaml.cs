@@ -24,11 +24,14 @@ namespace Mastermind
     {
         GameBoardState gbState;
         private Path[,] caps;
-        private Rectangle[,] pins;
+        private Path[,] pins;
         private string capData = "M 0 0 A 11,5 0 0 0 22,0 A 11,11 0 0 0 0,0";
+        private string pinData = "M 0 0 L 0 12 A 3,1 0 0 0 6,12 L 6 0 A 3,1 0 0 0 0 0";
         private Brush[] capBrushes = {Brushes.Transparent, Brushes.Red, Brushes.Green, Brushes.Orange, Brushes.Purple, Brushes.Brown, 
                                         Brushes.Yellow, Brushes.White, Brushes.Blue};
         private bool coverUp;
+        private int showPins;
+
         public bool CoverUp
         {
             get => coverUp;
@@ -38,7 +41,15 @@ namespace Mastermind
                 OnPropertyChanged(nameof(CoverUp));
             }
         }
-
+        public int ShowPins 
+        {
+            get => showPins;
+            set 
+            {
+                showPins = value;
+                OnPropertyChanged(nameof(ShowPins));
+            } 
+        }
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public GameBoard()
@@ -48,7 +59,7 @@ namespace Mastermind
             gbState.FillSecretFields(capBrushes.Count());
             CreateHiddenCaps();
             caps = new Path[GameBoardState.fieldsCount,GameBoardState.rowsCount];
-            pins = new Rectangle[GameBoardState.fieldsCount,GameBoardState.rowsCount];            
+            pins = new Path[GameBoardState.fieldsCount,GameBoardState.rowsCount];            
             for (int j = 0; j < GameBoardState.rowsCount; j++)
             {
                 for (int i = 0; i < GameBoardState.fieldsCount; i++)
@@ -64,6 +75,7 @@ namespace Mastermind
                 CreateColorCaps(color);
             }
             CoverUp = false;
+            ShowPins = 0;
             DataContext = this;
         }
         private void CreateHiddenCaps()
@@ -106,7 +118,7 @@ namespace Mastermind
         {
             Ellipse resultPlace = new Ellipse()
             {
-                Width = 5,
+                Width = 6,
                 Height = 3,
                 Fill = Brushes.Black
             };
@@ -116,16 +128,13 @@ namespace Mastermind
         }
         private void CreateTransparentPins(int i, int j)
         {
-            Rectangle rectangle = new Rectangle()
-            {
-                Width = 5,
-                Height = 12,
-                Fill = Brushes.Transparent
-            };
-            board.Children.Add(rectangle);
-            Canvas.SetLeft(rectangle, 200 + i * 15);
-            Canvas.SetBottom(rectangle, 30 + j * 30);
-            pins[i, j] = rectangle; 
+            Path transparentPin = new Path();
+            transparentPin.Data = Geometry.Parse(pinData);
+            transparentPin.Fill = Brushes.Transparent;
+            board.Children.Add(transparentPin);
+            Canvas.SetLeft(transparentPin, 200 + i * 15);
+            Canvas.SetBottom(transparentPin, 30 + j * 30);
+            pins[i, j] = transparentPin;
         }
         private void CreateColorCaps(int color)
         {
@@ -135,8 +144,8 @@ namespace Mastermind
             colorCap.Fill = capBrushes[color];
             colorCap.MouseLeftButtonDown += ColorCap_MouseLeftButtonDown;
             board.Children.Add(colorCap);
-            Canvas.SetRight(colorCap, 45);
-            Canvas.SetBottom(colorCap, 100 + 30 * color);
+            Canvas.SetRight(colorCap, 30);
+            Canvas.SetBottom(colorCap, 50 + 30 * color);
         }
         private void PlacedCap_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -167,6 +176,11 @@ namespace Mastermind
                 {
                     pins[i, gbState.actualRow].Fill = Brushes.White;
                 }
+                ShowPins = gbState.actualRow + 1;
+                if (gbState.actualRow == 0)
+                {
+                    CreateNewShowPin();
+                }
                 if (evalPins.BlackPins == GameBoardState.fieldsCount)
                 {
                     CoverUp = true;
@@ -186,6 +200,20 @@ namespace Mastermind
                     gbState.MoveToNextRow();
                 }
             }           
+        }
+        private void CreateNewShowPin()
+        {
+            Rectangle newShowPin = new Rectangle()
+            {
+                Fill = Brushes.Blue,
+                Width = 85,
+                Height = 12,
+            };
+            newShowPin.Style = (Style)FindResource("pinEjection");
+            board.Children.Add(newShowPin);
+            Canvas.SetLeft(newShowPin, 190);
+            Canvas.SetBottom(newShowPin, 33);
+            Canvas.SetZIndex(newShowPin, 1);
         }
         private void ResetBoard()
         {
