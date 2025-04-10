@@ -5,20 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mastermind"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="800">
+        Title="Mastermind" Height="650" Width="850" MinHeight="600" MinWidth="750">
     <Grid>
-        <TextBlock FontFamily="Goudy Stout" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock FontFamily="Goudy Stout" FontSize="35" Margin="20">
             <Span>M</Span>
-            <Span Foreground="Blue">A</Span>
-            <Span Foreground="Blue">S</Span>
-            <Span Foreground="Blue">T</Span>
-            <Span Foreground="Blue">E</Span>
+            <Span Foreground="Yellow">A</Span>
+            <Span Foreground="Red">S</Span>
+            <Span Foreground="DarkViolet">T</Span>
+            <Span Foreground="DeepSkyBlue">E</Span>
             <Span Foreground="Blue">R</Span>
-            <Span Foreground="Blue">M</Span>
-            <Span Foreground="Blue">I</Span>
-            <Span Foreground="Blue">N</Span>
+            <Span Foreground="Lime">M</Span>
+            <Span Foreground="Green">I</Span>
+            <Span Foreground="DarkGoldenrod">N</Span>
             <Span>D</Span>
         </TextBlock>
-        <local:GameBoard HorizontalAlignment="Left" Margin="100"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <local:GameBoard  Margin="20,0,100,0"/>
+            <StackPanel Grid.Column="1">
+                <TextBlock  Text="Pravidla hry:" FontWeight="Bold" FontSize="16"/>
+                <TextBlock TextWrapping="Wrap" FontSize="14" Text="Hra je v Česku známá také pod jménem Logik. Úkolem hráče je zjistit, 
+jakých 5 barevných figurek se skrývá za krytem v zadní části desky. Mohou se opakovat i stejné barvy. Hráč volí barvy kliknutím na figurky
+vpravo, figurky zaplňují pole zleva doprava. Před přidáním páté figurky může hráč tah ještě opravit tak, že klikne na figurky, které chce 
+odstranit a poté opět volí z barev napravo. Po přidání páté figurky se tah vyhodnotí tak, že za každou uhodnutou barvu na správné pozici 
+získá hráč černý kolíček,za správnou barvu na špatné pozici kolíček bílý. Hráč však neví, který kolíček za kterou barvu získal. Pokud hráč
+žádný kolíček nezískal, znamená to, že neuhodl žádnou barvu a pokračuje tipováním na dalším řádku.
+Zkoušením různých kombinací tak postupně podle vyhodnocení jednotlivých tahů přichází na správnou kombinaci. Po uhodnutí kombinace získá
+hráč 5 černých kolíčků a odhalí se pole se skrytými barvami. Pokud hráč zaplní všechna pole a kombinaci neodhalí, prohrál. Opět se mu odhalí
+pole se správnou kombinací."/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

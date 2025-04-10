@@ -28,8 +28,8 @@ namespace Mastermind
         private Path[,] pins;
         private string capData = "M 0 0 A 10,5 0 0 0 20,0 A 10,10 0 0 0 0,0";
         private string pinData = "M 0 0 L 0 12 A 3,1 0 0 0 6,12 L 6 0 A 3,1 0 0 0 0 0";
-        private Brush[] capBrushes = {Brushes.Transparent, Brushes.Red, Brushes.Green, Brushes.Lime, Brushes.DeepSkyBlue, 
-                                        Brushes.DarkGoldenrod, Brushes.Yellow, Brushes.BlueViolet, Brushes.Blue};
+        private Brush[] capBrushes = {Brushes.Transparent, Brushes.DarkGoldenrod, Brushes.Green, Brushes.Lime, Brushes.Blue,
+                                       Brushes.DeepSkyBlue, Brushes.BlueViolet, Brushes.Red, Brushes.Yellow};
         private bool coverUp;
         private int showPins;
 
@@ -210,7 +210,7 @@ namespace Mastermind
             trigger.EnterActions.Add(action);
             Style style = new Style() { TargetType = typeof(Rectangle)};
             style.Triggers.Add(trigger);
-            Rectangle newPinCover = new Rectangle() { Fill = Brushes.Blue, Width = 80, Height = 12 };
+            Rectangle newPinCover = new Rectangle() { Fill = Brushes.LightGray, Width = 80, Height = 12 };
             newPinCover.Style = style;
             board.Children.Add(newPinCover);
             Canvas.SetLeft(newPinCover, 180);
