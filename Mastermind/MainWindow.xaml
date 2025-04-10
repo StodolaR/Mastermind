@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mastermind"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="500">
+        Title="MainWindow" Height="700" Width="800">
     <Grid>
-        <local:GameBoard/>
+        <TextBlock FontFamily="Goudy Stout" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
+            <Span>M</Span>
+            <Span Foreground="Blue">A</Span>
+            <Span Foreground="Blue">S</Span>
+            <Span Foreground="Blue">T</Span>
+            <Span Foreground="Blue">E</Span>
+            <Span Foreground="Blue">R</Span>
+            <Span Foreground="Blue">M</Span>
+            <Span Foreground="Blue">I</Span>
+            <Span Foreground="Blue">N</Span>
+            <Span>D</Span>
+        </TextBlock>
+        <local:GameBoard HorizontalAlignment="Left" Margin="100"/>
     </Grid>
 </Window>

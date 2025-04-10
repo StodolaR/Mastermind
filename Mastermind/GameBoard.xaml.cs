@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -62,6 +63,7 @@ namespace Mastermind
             pins = new Path[GameBoardState.fieldsCount,GameBoardState.rowsCount];            
             for (int j = 0; j < GameBoardState.rowsCount; j++)
             {
+                CreateNewPinCover(j);
                 for (int i = 0; i < GameBoardState.fieldsCount; i++)
                 {
                     CreateCapPlaces(i, j);
@@ -75,7 +77,7 @@ namespace Mastermind
                 CreateColorCaps(color);
             }
             CoverUp = false;
-            ShowPins = 0;
+            ShowPins = -1;
             DataContext = this;
         }
         private void CreateHiddenCaps()
@@ -176,11 +178,7 @@ namespace Mastermind
                 {
                     pins[i, gbState.actualRow].Fill = Brushes.White;
                 }
-                ShowPins = gbState.actualRow + 1;
-                if (gbState.actualRow == 0)
-                {
-                    CreateNewShowPin();
-                }
+                ShowPins = gbState.actualRow;
                 if (evalPins.BlackPins == GameBoardState.fieldsCount)
                 {
                     CoverUp = true;
@@ -201,19 +199,23 @@ namespace Mastermind
                 }
             }           
         }
-        private void CreateNewShowPin()
+        private void CreateNewPinCover(int row)
         {
-            Rectangle newShowPin = new Rectangle()
-            {
-                Fill = Brushes.Blue,
-                Width = 80,
-                Height = 12,
-            };
-            newShowPin.Style = (Style)FindResource("pinEjection");
-            board.Children.Add(newShowPin);
-            Canvas.SetLeft(newShowPin, 180);
-            Canvas.SetBottom(newShowPin, 53);
-            Canvas.SetZIndex(newShowPin, 1);
+            var move = new DoubleAnimation() {From = 53 + 30 * row, To = 65 + 30 * row, Duration = new Duration(TimeSpan.FromSeconds(1)) };
+            Storyboard.SetTargetProperty(move, new PropertyPath(Canvas.BottomProperty));
+            var storyboard = new Storyboard();
+            storyboard.Children.Add(move);
+            var action = new BeginStoryboard() { Storyboard = storyboard };
+            var trigger = new DataTrigger() { Binding = new Binding("ShowPins"), Value = row};
+            trigger.EnterActions.Add(action);
+            Style style = new Style() { TargetType = typeof(Rectangle)};
+            style.Triggers.Add(trigger);
+            Rectangle newPinCover = new Rectangle() { Fill = Brushes.Blue, Width = 80, Height = 12 };
+            newPinCover.Style = style;
+            board.Children.Add(newPinCover);
+            Canvas.SetLeft(newPinCover, 180);
+            Canvas.SetBottom(newPinCover, 53 + 30 * row);
+            Canvas.SetZIndex(newPinCover, 1);
         }
         private void ResetBoard()
         {
