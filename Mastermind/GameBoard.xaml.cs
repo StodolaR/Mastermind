@@ -27,8 +27,8 @@ namespace Mastermind
         private Path[,] pins;
         private string capData = "M 0 0 A 10,5 0 0 0 20,0 A 10,10 0 0 0 0,0";
         private string pinData = "M 0 0 L 0 12 A 3,1 0 0 0 6,12 L 6 0 A 3,1 0 0 0 0 0";
-        private Brush[] capBrushes = {Brushes.Transparent, Brushes.Red, Brushes.Green, Brushes.Orange, Brushes.Purple, Brushes.Brown, 
-                                        Brushes.Yellow, Brushes.White, Brushes.Blue};
+        private Brush[] capBrushes = {Brushes.Transparent, Brushes.Red, Brushes.Green, Brushes.Lime, Brushes.DeepSkyBlue, 
+                                        Brushes.DarkGoldenrod, Brushes.Yellow, Brushes.BlueViolet, Brushes.Blue};
         private bool coverUp;
         private int showPins;
 
@@ -100,7 +100,7 @@ namespace Mastermind
             };
             board.Children.Add(capPlace);
             Canvas.SetLeft(capPlace, 30+j*(2-i*0.5) + i * 30);
-            Canvas.SetBottom(capPlace, 30 + j * 30);
+            Canvas.SetBottom(capPlace, 50 + j * 30);
         }
         private void CreateTransparentCaps(int i, int j)
         {
@@ -111,7 +111,7 @@ namespace Mastermind
             transparentCap.MouseLeftButtonDown += PlacedCap_MouseLeftButtonDown;
             board.Children.Add(transparentCap);
             Canvas.SetLeft(transparentCap, 27 + j * (2 - i * 0.5) + i * 30);
-            Canvas.SetBottom(transparentCap, 27 + j * 30);
+            Canvas.SetBottom(transparentCap, 47 + j * 30);
             caps[i, j] = transparentCap;
         }
         private void CreatePinPlaces(int i, int j)
@@ -123,8 +123,8 @@ namespace Mastermind
                 Fill = Brushes.Black
             };
             board.Children.Add(resultPlace);
-            Canvas.SetLeft(resultPlace, 200 + i * (15 - j * 0.3));
-            Canvas.SetBottom(resultPlace, 30 + j * 30);
+            Canvas.SetLeft(resultPlace, 190 + i * (15 - j * 0.3));
+            Canvas.SetBottom(resultPlace, 50 + j * 30);
         }
         private void CreateTransparentPins(int i, int j)
         {
@@ -132,8 +132,8 @@ namespace Mastermind
             transparentPin.Data = Geometry.Parse(pinData);
             transparentPin.Fill = Brushes.Transparent;
             board.Children.Add(transparentPin);
-            Canvas.SetLeft(transparentPin, 200 + i * (15 - j * 0.3));
-            Canvas.SetBottom(transparentPin, 30 + j * 30);
+            Canvas.SetLeft(transparentPin, 190 + i * (15 - j * 0.3));
+            Canvas.SetBottom(transparentPin, 50 + j * 30);
             pins[i, j] = transparentPin;
         }
         private void CreateColorCaps(int color)
@@ -144,8 +144,8 @@ namespace Mastermind
             colorCap.Fill = capBrushes[color];
             colorCap.MouseLeftButtonDown += ColorCap_MouseLeftButtonDown;
             board.Children.Add(colorCap);
-            Canvas.SetRight(colorCap, 20 + (2 * color));
-            Canvas.SetBottom(colorCap, 50 + 30 * color);
+            Canvas.SetRight(colorCap, 25 + (2 * color));
+            Canvas.SetBottom(colorCap, 75 + 30 * color);
         }
         private void PlacedCap_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -205,14 +205,14 @@ namespace Mastermind
         {
             Rectangle newShowPin = new Rectangle()
             {
-                Fill = Brushes.LightGray,
+                Fill = Brushes.Blue,
                 Width = 80,
                 Height = 12,
             };
             newShowPin.Style = (Style)FindResource("pinEjection");
             board.Children.Add(newShowPin);
-            Canvas.SetLeft(newShowPin, 190);
-            Canvas.SetBottom(newShowPin, 33);
+            Canvas.SetLeft(newShowPin, 180);
+            Canvas.SetBottom(newShowPin, 53);
             Canvas.SetZIndex(newShowPin, 1);
         }
         private void ResetBoard()

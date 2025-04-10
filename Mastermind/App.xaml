@@ -30,7 +30,7 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:1" From="33" To="45" Storyboard.TargetProperty="(Canvas.Bottom)"/>
+                                <DoubleAnimation Duration="0:0:1" From="53" To="65" Storyboard.TargetProperty="(Canvas.Bottom)"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -39,7 +39,7 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:1" From="63" To="75" Storyboard.TargetProperty="(Canvas.Bottom)"/>
+                                <DoubleAnimation Duration="0:0:1" From="83" To="95" Storyboard.TargetProperty="(Canvas.Bottom)"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -48,7 +48,7 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:1" From="93" To="105" Storyboard.TargetProperty="(Canvas.Bottom)"/>
+                                <DoubleAnimation Duration="0:0:1" From="113" To="125" Storyboard.TargetProperty="(Canvas.Bottom)"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -57,7 +57,7 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:1" From="123" To="135" Storyboard.TargetProperty="(Canvas.Bottom)"/>
+                                <DoubleAnimation Duration="0:0:1" From="143" To="155" Storyboard.TargetProperty="(Canvas.Bottom)"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -66,7 +66,7 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:1" From="153" To="165" Storyboard.TargetProperty="(Canvas.Bottom)"/>
+                                <DoubleAnimation Duration="0:0:1" From="173" To="185" Storyboard.TargetProperty="(Canvas.Bottom)"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -75,7 +75,7 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:1" From="183" To="195" Storyboard.TargetProperty="(Canvas.Bottom)"/>
+                                <DoubleAnimation Duration="0:0:1" From="203" To="215" Storyboard.TargetProperty="(Canvas.Bottom)"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -84,7 +84,7 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:1" From="213" To="225" Storyboard.TargetProperty="(Canvas.Bottom)"/>
+                                <DoubleAnimation Duration="0:0:1" From="233" To="245" Storyboard.TargetProperty="(Canvas.Bottom)"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -93,7 +93,7 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:1" From="243" To="255" Storyboard.TargetProperty="(Canvas.Bottom)"/>
+                                <DoubleAnimation Duration="0:0:1" From="263" To="275" Storyboard.TargetProperty="(Canvas.Bottom)"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -102,7 +102,7 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:1" From="273" To="285" Storyboard.TargetProperty="(Canvas.Bottom)"/>
+                                <DoubleAnimation Duration="0:0:1" From="293" To="305" Storyboard.TargetProperty="(Canvas.Bottom)"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -111,7 +111,7 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:1" From="303" To="315" Storyboard.TargetProperty="(Canvas.Bottom)"/>
+                                <DoubleAnimation Duration="0:0:1" From="323" To="335" Storyboard.TargetProperty="(Canvas.Bottom)"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -120,7 +120,7 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:1" From="333" To="345" Storyboard.TargetProperty="(Canvas.Bottom)"/>
+                                <DoubleAnimation Duration="0:0:1" From="353" To="365" Storyboard.TargetProperty="(Canvas.Bottom)"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -129,7 +129,7 @@
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Duration="0:0:1" From="363" To="375" Storyboard.TargetProperty="(Canvas.Bottom)"/>
+                                <DoubleAnimation Duration="0:0:1" From="383" To="395" Storyboard.TargetProperty="(Canvas.Bottom)"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
