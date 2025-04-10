@@ -32,7 +32,14 @@ namespace Mastermind
                                        Brushes.DeepSkyBlue, Brushes.BlueViolet, Brushes.Red, Brushes.Yellow};
         private bool coverUp;
         private int showPins;
-
+        private const int capDistance = 30;
+        private const int capAndCapPlaceDiference = 3;
+        private const int distanceFromBottomEdge = 50;
+        private const int distanceCapsFromLeftEdge = 30;
+        private const int distancePinsFromLeftEdge = 190;
+        private const int distanceHiddenCapsFromTopEdge = 60;
+        private const int distanceColorCapsFromRightEdge = 25;
+        private const int distanceColorCapsFromBottomEdge = 75;
         public bool CoverUp
         {
             get => coverUp;
@@ -66,10 +73,12 @@ namespace Mastermind
                 CreateNewPinCover(j);
                 for (int i = 0; i < GameBoardState.fieldsCount; i++)
                 {
-                    CreateCapPlaces(i, j);
-                    CreateTransparentCaps(i, j);
-                    CreatePinPlaces(i,j);
-                    CreateTransparentPins(i,j);
+                    double caps3DNarrowing = 2 - i * 0.5;
+                    double pins3DNarrowing = 15 - j * 0.3;
+                    CreateCapPlaces(i, j, caps3DNarrowing);
+                    CreateTransparentCaps(i, j, caps3DNarrowing);
+                    CreatePinPlaces(i,j, pins3DNarrowing);
+                    CreateTransparentPins(i,j, pins3DNarrowing);
                 }
             }
             for (int color = 1; color < capBrushes.Count(); color++)
@@ -88,11 +97,12 @@ namespace Mastermind
                 hiddenCap.Data = Geometry.Parse(capData);
                 hiddenCap.Fill = capBrushes[gbState.secretFields[i]];
                 board.Children.Add(hiddenCap);
-                Canvas.SetLeft(hiddenCap, 27 + 13 * (2 - i * 0.5) + i * 30);
-                Canvas.SetTop(hiddenCap, 60);
+                double caps3DNarrowing = 2 - i * 0.5;
+                Canvas.SetLeft(hiddenCap, distanceCapsFromLeftEdge - capAndCapPlaceDiference + 13 * caps3DNarrowing + i * capDistance);
+                Canvas.SetTop(hiddenCap, distanceHiddenCapsFromTopEdge);
             }
         }
-        private void CreateCapPlaces(int i, int j)
+        private void CreateCapPlaces(int i, int j, double caps3DNarrowing)
         {
             Ellipse capPlace = new Ellipse()
             {
@@ -101,10 +111,10 @@ namespace Mastermind
                 Fill = Brushes.Black
             };
             board.Children.Add(capPlace);
-            Canvas.SetLeft(capPlace, 30+j*(2-i*0.5) + i * 30);
-            Canvas.SetBottom(capPlace, 50 + j * 30);
+            Canvas.SetLeft(capPlace, capDistance +j*caps3DNarrowing + i * capDistance);
+            Canvas.SetBottom(capPlace, distanceFromBottomEdge + j * capDistance);
         }
-        private void CreateTransparentCaps(int i, int j)
+        private void CreateTransparentCaps(int i, int j, double cap3DNarrowing)
         {
             Path transparentCap = new Path();
             transparentCap.Tag = i.ToString() + "," + j.ToString();
@@ -112,11 +122,11 @@ namespace Mastermind
             transparentCap.Fill = Brushes.Transparent;
             transparentCap.MouseLeftButtonDown += PlacedCap_MouseLeftButtonDown;
             board.Children.Add(transparentCap);
-            Canvas.SetLeft(transparentCap, 27 + j * (2 - i * 0.5) + i * 30);
-            Canvas.SetBottom(transparentCap, 47 + j * 30);
+            Canvas.SetLeft(transparentCap, capDistance - capAndCapPlaceDiference + j * cap3DNarrowing + i * capDistance);
+            Canvas.SetBottom(transparentCap, distanceFromBottomEdge - capAndCapPlaceDiference + j * capDistance);
             caps[i, j] = transparentCap;
         }
-        private void CreatePinPlaces(int i, int j)
+        private void CreatePinPlaces(int i, int j, double pins3DNarrowing)
         {
             Ellipse resultPlace = new Ellipse()
             {
@@ -125,17 +135,17 @@ namespace Mastermind
                 Fill = Brushes.Black
             };
             board.Children.Add(resultPlace);
-            Canvas.SetLeft(resultPlace, 190 + i * (15 - j * 0.3));
-            Canvas.SetBottom(resultPlace, 50 + j * 30);
+            Canvas.SetLeft(resultPlace, distancePinsFromLeftEdge + i * pins3DNarrowing);
+            Canvas.SetBottom(resultPlace, distanceFromBottomEdge + j * capDistance);
         }
-        private void CreateTransparentPins(int i, int j)
+        private void CreateTransparentPins(int i, int j, double pins3DNarrowing)
         {
             Path transparentPin = new Path();
             transparentPin.Data = Geometry.Parse(pinData);
             transparentPin.Fill = Brushes.Transparent;
             board.Children.Add(transparentPin);
-            Canvas.SetLeft(transparentPin, 190 + i * (15 - j * 0.3));
-            Canvas.SetBottom(transparentPin, 50 + j * 30);
+            Canvas.SetLeft(transparentPin, distancePinsFromLeftEdge + i * pins3DNarrowing);
+            Canvas.SetBottom(transparentPin, distanceFromBottomEdge + j * capDistance);
             pins[i, j] = transparentPin;
         }
         private void CreateColorCaps(int color)
@@ -146,8 +156,9 @@ namespace Mastermind
             colorCap.Fill = capBrushes[color];
             colorCap.MouseLeftButtonDown += ColorCap_MouseLeftButtonDown;
             board.Children.Add(colorCap);
-            Canvas.SetRight(colorCap, 25 + (2 * color));
-            Canvas.SetBottom(colorCap, 75 + 30 * color);
+            double colorCaps3DNarrowing = 2 * color;
+            Canvas.SetRight(colorCap, distanceColorCapsFromRightEdge + colorCaps3DNarrowing);
+            Canvas.SetBottom(colorCap, distanceColorCapsFromBottomEdge + capDistance * color);
         }
         private void PlacedCap_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -181,17 +192,11 @@ namespace Mastermind
                 ShowPins = gbState.actualRow;
                 if (evalPins.BlackPins == GameBoardState.fieldsCount)
                 {
-                    CoverUp = true;
-                    MessageBox.Show("Vyhrál jsi!");
-                    CoverUp = false;
-                    ResetBoard();
+                    EndGame("Vyhrál jsi!");
                 }
                 else if (gbState.actualRow == GameBoardState.rowsCount - 1)
                 {
-                    CoverUp = true;
-                    MessageBox.Show("Prohrál jsi...");
-                    CoverUp = false;
-                    ResetBoard();
+                    EndGame("Prohrál jsi...");
                 }
                 else
                 {
@@ -199,9 +204,17 @@ namespace Mastermind
                 }
             }           
         }
+        private void EndGame(string message)
+        {
+            CoverUp = true;
+            MessageBox.Show(message);
+            CoverUp = false;
+            ResetBoard();
+        }
         private void CreateNewPinCover(int row)
         {
-            var move = new DoubleAnimation() {From = 53 + 30 * row, To = 65 + 30 * row, Duration = new Duration(TimeSpan.FromSeconds(1)) };
+            var move = new DoubleAnimation() {From = distanceFromBottomEdge + 3 + capDistance * row, 
+                To = distanceFromBottomEdge + 15 + capDistance * row, Duration = new Duration(TimeSpan.FromSeconds(1)) };
             Storyboard.SetTargetProperty(move, new PropertyPath(Canvas.BottomProperty));
             var storyboard = new Storyboard();
             storyboard.Children.Add(move);
@@ -213,8 +226,8 @@ namespace Mastermind
             Rectangle newPinCover = new Rectangle() { Fill = Brushes.LightGray, Width = 80, Height = 12 };
             newPinCover.Style = style;
             board.Children.Add(newPinCover);
-            Canvas.SetLeft(newPinCover, 180);
-            Canvas.SetBottom(newPinCover, 53 + 30 * row);
+            Canvas.SetLeft(newPinCover, distancePinsFromLeftEdge - 10);
+            Canvas.SetBottom(newPinCover, distanceFromBottomEdge + 3 + capDistance * row);
             Canvas.SetZIndex(newPinCover, 1);
         }
         private void ResetBoard()

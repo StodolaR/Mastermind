@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
         <TextBlock FontFamily="Goudy Stout" FontSize="35" Margin="20">
             <Span>M</Span>
-            <Span Foreground="Yellow">A</Span>
+            <Span Foreground="Orange">A</Span>
             <Span Foreground="Red">S</Span>
             <Span Foreground="DarkViolet">T</Span>
             <Span Foreground="DeepSkyBlue">E</Span>
