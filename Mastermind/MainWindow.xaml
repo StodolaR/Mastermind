@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mastermind"
         mc:Ignorable="d"
-        Title="Mastermind" Height="650" Width="850" MinHeight="600" MinWidth="750">
-    <Grid>
+        Title="Mastermind" Height="650" Width="850" MinHeight="600" MinWidth="750" Icon="Resources/colors_icon.ico">
+    <Grid Background="Bisque">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Image Source="Resources/otazniky.png" Grid.Row="1" HorizontalAlignment="Right" Opacity="0.1"/>
         <TextBlock FontFamily="Goudy Stout" FontSize="35" Margin="20">
             <Span>M</Span>
             <Span Foreground="Orange">A</Span>
