@@ -8,9 +8,23 @@
              d:DesignHeight="500" d:DesignWidth="400">
     <Grid>
         <Canvas x:Name="board" Width="330" Height="490">
-            <Path Data="M 30 25 L 300 25 L 330 470 L 0 470 Z" Fill="LightGray" />
+            <Path Data="M 30 25 L 300 25 L 330 470 L 0 470 Z">
+                <Path.Fill>
+                    <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                        <GradientStop Color="LightGray" Offset="0.4"/>
+                        <GradientStop Color="LightSlateGray" Offset="1"/>
+                    </LinearGradientBrush>
+                </Path.Fill>
+            </Path>
             <Rectangle Width="330" Height="20" Fill="Gray" Canvas.Left="0" Canvas.Bottom="0"/>
-            <Path Data="M 25 -20 L 155 -20 L 160 -50 L 20 -50 Z" Fill="DarkGray" Panel.ZIndex="1" Canvas.Left="20" Canvas.Top="70" Style="{StaticResource coverStyle}"/>
+            <Path Data="M 25 -20 L 155 -20 L 160 -50 L 20 -50 Z"  Panel.ZIndex="1" Canvas.Left="20" Canvas.Top="70" Style="{StaticResource coverStyle}">
+                <Path.Fill>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Color="DarkGray" Offset="0.4"/>
+                        <GradientStop Color="LightGray" Offset="1"/>
+                    </LinearGradientBrush>
+                </Path.Fill>
+            </Path>
             <Path Data="M 20 0 L 160 0 L 155 -20 L 25 -20 Z" Fill="Gray" Panel.ZIndex="1" Canvas.Left="20" Canvas.Top="70" Style="{StaticResource coverStyle}"/>
             <Path Data="M 20 0 L 25 -20 L 20 -50 L 15 -30 Z" Fill="DimGray" Panel.ZIndex="1" Canvas.Left="20" Canvas.Top="70" Style="{StaticResource coverStyle}"/>
             <Path Data="M 160 0 L 165 -30 L 160 -50 L 155 -20 Z" Fill="DimGray" Panel.ZIndex="1" Canvas.Left="20" Canvas.Top="70" Style="{StaticResource coverStyle}"/>
